@@ -6,7 +6,6 @@ This project implements a machine learning pipeline to classify the sentiment of
 ## Pipeline Workflow
 
 ### 1. Data Cleaning and Preprocessing
-* The dataset is loaded using 'cp1252' encoding to handle special characters.
 * A custom 'clean' function converts text to lowercase and removes URLs and handles.
 * Special characters and numbers are stripped, leaving only alphabetic text.
 * Empty strings are converted to NaN and dropped to ensure data integrity.
