@@ -15,7 +15,6 @@ The goal of this project is to predict whether a transaction will be profitable 
 ## 🚀 Workflow & Methodology
 
 ### 1. Data Preprocessing & Cleaning
-- **Encoding:** Handled dataset special characters using `cp1252` encoding.
 - **Dimensionality Reduction:** Dropped high-cardinality and non-predictive columns such as `Order ID`, `Customer Name`, and `Postal Code` to prevent overfitting.
 - **Target Engineering:** Created a binary target variable `Profitable` (1 for profit > 0, 0 otherwise).
 
