@@ -1,4 +1,4 @@
-# Titanic Survivor Predictor: Detailed Analysis
+# Titanic Survivor Predictor
 
 This project explores the Titanic dataset to build a predictive model that determines passenger survival based on demographic and trip-related data.
 
