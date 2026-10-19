@@ -12,10 +12,9 @@
 * **[Project 4: Course Lead Conversion Prediction](./ML-Projects/ML-Lead-Scoring)**
   Predicting which course leads will buy using **Logistic Regression** and **XGBoost**, with train-only **imputation** and a **leakage check** on a derived lead score.
 
-### 🐦 Natural Language Processing (NLP)
-* **[Project 5: Twitter Sentiment Engine](./ML-Projects/ML-Sentiment-Analysis)**
-  A 3-class classifier with a custom **Regex cleaning pipeline** and **TF-IDF vectorization**.
+* **[Project 5: Superstore Profitability Prediction](./ML-Projects/ML-Superstore)**
+  Predicting whether retail orders are profitable using **Logistic Regression** and **Random Forest** pipelines, with **SMOTE** for class imbalance and cross-validated model selection.
 
-### 🏢 Exploratory Data Analysis (EDA)
-* **[Project 6: Superstore Profitability Analysis](./ML-Projects/ML-Superstore)**
-  Business intelligence analysis identifying "Profit Leakage" via **Pandas** and **Seaborn**.
+### 🐦 Natural Language Processing (NLP)
+* **[Project 6: Twitter Sentiment Engine](./ML-Projects/ML-Sentiment-Analysis)**
+  A 3-class classifier with a custom **Regex cleaning pipeline** and **TF-IDF vectorization**.
