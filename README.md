@@ -9,10 +9,13 @@
 * **[Project 3: Titanic Survivor Predictor](./ML-Projects/ML-Titanic/Titanic-ML.ipynb)**
   Classic binary classification. Includes **Data Imputation** by passenger title and survival probability.
 
+* **[Project 4: Course Lead Conversion Prediction](./ML-Projects/ML-Lead-Scoring/lead-scoring_fixed.ipynb)**
+  Predicting which course leads will buy using **Logistic Regression** and **XGBoost**, with train-only **imputation** and a **leakage check** on a derived lead score.
+
 ### 🐦 Natural Language Processing (NLP)
-* **[Project 4: Twitter Sentiment Engine](./ML-Projects/ML-Sentiment-Analysis/Tweets-ML.ipynb)**
+* **[Project 5: Twitter Sentiment Engine](./ML-Projects/ML-Sentiment-Analysis/Tweets-ML.ipynb)**
   A 3-class classifier with a custom **Regex cleaning pipeline** and **TF-IDF vectorization**.
 
 ### 🏢 Exploratory Data Analysis (EDA)
-* **[Project 5: Superstore Profitability Analysis](./ML-Projects/ML-Superstore/RandomForest-Improved.ipynb)**
+* **[Project 6: Superstore Profitability Analysis](./ML-Projects/ML-Superstore/RandomForest-Improved.ipynb)**
   Business intelligence analysis identifying "Profit Leakage" via **Pandas** and **Seaborn**.
