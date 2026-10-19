@@ -6,7 +6,7 @@ A machine learning pipeline that classifies tweets as **negative**, **neutral** 
 
 ## Dataset
 
-* Source: **[DATASET NAME](https://www.kaggle.com/datasets/abhi8923shriv/sentiment-analysis-dataset)** on Kaggle.
+* Source: **[Sentiment Analysis Dataset](https://www.kaggle.com/datasets/abhi8923shriv/sentiment-analysis-dataset)** on Kaggle.
 * The file `tweets.csv` has 4,815 rows and 9 columns. 1,281 rows have no text or label, so **3,533 labeled tweets** are used.
 * Only the `text` and `sentiment` columns are used. The other columns (time of tweet, age of user, country, population, land area, density) are ignored.
 * Class distribution: neutral 1,429, positive 1,103, negative 1,001.
