@@ -2,7 +2,7 @@
 * **[Project 1: BigMart Sales Prediction](./ML-Projects/ML-BigMart-Sales/BigMart.ipynb)**
   Predicting store-wise product sales using **XGBoost** and **Random Forest**.
 
-* **[Project 2: Housing Prices Regression](./ML-Projects/ML-Housing-Reg/Housing.ipynb)**
+* **[Project 2: Housing Prices Regression](.ML-Projects/ML-Housing-Reg/Housing-Reg-01.ipynb)**
   A deep dive into real estate valuation using **Linear Regression** and **Regularization**.
 
 ### 📉 Classification & Survival Analysis
