@@ -1,34 +1,58 @@
 # Titanic Survivor Predictor
 
-This project explores the Titanic dataset to build a predictive model that determines passenger survival based on demographic and trip-related data.
+A machine learning project that predicts whether a Titanic passenger survived, using demographic and trip-related data. It builds a leakage-safe scikit-learn / imbalanced-learn pipeline and tunes a Random Forest for macro recall.
 
 ## 🛠️ Data Strategy & Insights
-The project follows a rigorous data science pipeline, from cleaning to advanced model optimization:
 
-* **Handling Missing Data:**
-    * **Age:** Missing values were imputed using the **median age** to preserve the distribution without being skewed by outliers.
-    * **Embarked:** The two missing records were filled with the **mode** (the most frequent port), ensuring no data was lost during modeling.
-    * **Cabin:** This feature was dropped entirely due to a high volume of missing values, which would have introduced significant noise.
-* **Feature Engineering:**
-    * **FamilySize:** I engineered a new feature by combining `SibSp` (siblings/spouses) and `Parch` (parents/children) plus the passenger themselves. This captures the impact of traveling alone versus with a family unit.
-* **Preprocessing:**
-    * A `ColumnTransformer` was used to apply **StandardScaler** to numerical features and **OneHotEncoder** to categorical ones, ensuring all data is on a comparable scale for the algorithms.
+**Dataset:** `train.csv` from Kaggle's *Titanic: Machine Learning from Disaster* competition (891 passengers, about 38% survivors).
+
+* **Handling Missing Data**
+  * **Age** (177 missing): imputed with the **median**, which is not skewed by outliers.
+  * **Embarked** (2 missing): imputed with the **most frequent port**.
+  * **Cabin** (687 of 891 missing, about 77%): dropped entirely, because too little of it is known to be useful.
+  * Imputation happens **inside the pipeline**, so the median and mode are learned from training data only (and from each training fold during cross-validation), never from the test set.
+* **Feature Engineering**
+  * **FamilySize:** `SibSp` + `Parch` + 1 (the passenger themselves), capturing the effect of travelling alone versus with a family.
+* **Dropped columns:** `PassengerId`, `Name` and `Ticket`, which are identifiers with no direct predictive signal.
+* **Preprocessing:** a `ColumnTransformer` applies imputation plus `StandardScaler` to numerical features (`Age`, `Fare`, `FamilySize`) and imputation plus `OneHotEncoder` to categorical ones (`Pclass`, `Sex`, `Embarked`). Scaling is not required for a Random Forest, but it keeps the pipeline reusable with scale-sensitive models.
 
 ## 🧠 Model Architecture & Optimization
-To address the challenges of the dataset, I implemented the following:
 
-* **Class Imbalance:** Used **SMOTE** (Synthetic Minority Over-sampling Technique) within the pipeline to synthesize new examples of the minority class, ensuring the model isn't biased toward non-survivors.
-* **The Pipeline:** Integrated preprocessing, over-sampling, and classification into a single `imblearn.pipeline.Pipeline`. This prevents data leakage during cross-validation.
-* **Hyperparameter Tuning:** I used `GridSearchCV` to test different combinations of parameters for the **Random Forest Classifier**, specifically focusing on:
-    * `n_estimators`: [50, 100, 200]
-    * `max_depth`: [5, 10, None]
-* **Optimization Metric:** The model was optimized for **Macro Recall**, ensuring that the model is effective at identifying both survivors and those who did not survive.
+* **Class imbalance:** the classes are mildly imbalanced (about 38% survivors), so **SMOTE** (Synthetic Minority Over-sampling Technique) is used inside the pipeline to synthesize extra survivor examples.
+* **The pipeline:** a single `imblearn.pipeline.Pipeline` bundles imputation, scaling, encoding, SMOTE and the classifier. Every step is fitted on training data only, and SMOTE is applied to training folds only, so nothing from validation or test data leaks into training.
+* **Hyperparameter tuning:** `GridSearchCV` with 5-fold cross-validation over a Random Forest Classifier:
+  * `n_estimators`: [50, 100, 200]
+  * `max_depth`: [5, 10, None]
+* **Optimization metric:** **macro recall**, so the model is rewarded for identifying both survivors and non-survivors rather than only the majority class.
+* **Best parameters:** `n_estimators=50`, `max_depth=5` (cross-validated macro recall 0.806).
 
 ## 📊 Performance Results
-The final model was evaluated on a 20% hold-out test set, producing a detailed classification report that includes precision, recall, and f1-scores for both classes.
 
-## 🚀 Technical Requirements
-- Python 3.x
-- Pandas, Seaborn, Matplotlib
-- Scikit-Learn
-- Imbalanced-Learn
+Evaluated once on a stratified 20% hold-out set (179 passengers).
+
+| Metric | Score |
+|---|---|
+| Accuracy | 0.79 |
+| Macro recall | 0.79 |
+| Macro F1 | 0.78 |
+| Majority-class baseline accuracy | 0.615 |
+
+| Class | Precision | Recall | F1 | Support |
+|---|---|---|---|---|
+| Did not survive (0) | 0.85 | 0.81 | 0.83 | 110 |
+| Survived (1) | 0.72 | 0.77 | 0.74 | 69 |
+
+## ⚠️ Limitations
+
+* Small dataset: the test set is only 179 passengers, so a difference of a few passengers moves the scores by about a percentage point. Treat these numbers as approximate.
+* Only a Random Forest was tuned. No other algorithms were compared, and the grid is small.
+* No features were extracted from `Name` (for example passenger title), and `Cabin` was dropped rather than mined for deck information.
+
+## 🚀 Run it
+
+```bash
+pip install pandas seaborn matplotlib scikit-learn imbalanced-learn
+jupyter notebook Titanic-ML.ipynb
+```
+
+Place `train.csv` in the same folder as the notebook.
