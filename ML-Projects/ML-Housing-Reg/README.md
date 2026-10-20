@@ -27,7 +27,7 @@ A machine learning project that predicts the median house value of California ce
 | AveBedrms | −0.047 |
 | Latitude | −0.144 |
 
-* Latitude, longitude and average occupancy have only weak linear correlation with price (between −0.14 and −0.02), yet they carry a large share of the Random Forest’s feature importance (see below). This points to non-linear effects, such as price clusters along the coast, which is consistent with the linear model scoring far below the forest.
+* Latitude, longitude and average occupancy have almost no *linear* correlation with price, yet they carry a large share of the Random Forest's feature importance (see below). This points to non-linear effects, such as price clusters along the coast, which is consistent with the linear model scoring far below the forest.
 
 ## Approach
 
